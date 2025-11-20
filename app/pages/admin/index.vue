@@ -3,6 +3,12 @@ definePageMeta({
     layout: 'app'
 });
 
+onMounted(() => {
+  // const user = useUserCookie();
+  // console.log("User cookie on mounted (admin):", user.id);
+})
+
+
 const stats = [
   {
     title: 'Total Users',

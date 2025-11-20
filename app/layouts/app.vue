@@ -1,7 +1,7 @@
 <script setup>
-const sidebarOpen = ref(false)
-const sidebarCollapsed = ref(false)
-const sidebarHovered = ref(false)
+  const sidebarOpen = ref(false)
+  const sidebarCollapsed = ref(false)
+  const sidebarHovered = ref(false)
 </script>
 
 <template>

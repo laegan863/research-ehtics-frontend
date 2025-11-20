@@ -7,6 +7,12 @@ const { user } = useUser()
 const route = useRoute()
 const showUserMenu = ref(false)
 
+const handleLogout = async () => {
+    await useLogout();
+    const router = useRouter();
+    router.push('/');
+}
+
 const sidebar = [
     {
         name: 'Dashboard',
@@ -90,6 +96,19 @@ const sidebar = [
                 link: '/admin/components/dropdown',
             },
         ]
+    },
+    {
+        name: 'User Management',
+        icon: 'users',
+        link: '#',
+        children: [
+          {
+            name: 'manage Users',
+            icon: 'circle',
+            link: '/admin/users',
+          }
+        ],
+        isOpen: ref(false)
     },
     {
         name: 'Sample',
@@ -316,7 +335,7 @@ const sidebar = [
             </NuxtLink>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-700 p-2">
-            <button class="flex w-full items-center gap-x-3 rounded-lg px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors">
+            <button @click="handleLogout" class="flex w-full items-center gap-x-3 rounded-lg px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
               </svg>

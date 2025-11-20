@@ -330,7 +330,7 @@ onUnmounted(() => {
                 <!-- Icon slot -->
                 <span v-if="option.icon" v-html="option.icon" class="flex-shrink-0" />
                 
-                <span class="flex-1">{{ option.label }}</span>
+                <span class="flex-1 text-sm">{{ option.label }}</span>
                 
                 <!-- Checkmark for selected item in select mode -->
                 <svg

@@ -111,7 +111,7 @@
                 <Button variant="danger" @click="handleDeleteItem">Delete</Button>
             </template>
         </Modal>
-        <Button variant="primary" class="mb-4" @click="$router.push('/samples/add-user')">
+        <Button variant="primary" class="mb-4" @click="$router.push('add-user')">
             <font-awesome-icon icon="plus"/> Add User
         </Button>
         <CardContainer>
@@ -140,7 +140,7 @@
                         <TableTh>ID</TableTh>
                         <TableTh>Name</TableTh>
                         <TableTh>Email</TableTh>
-                        <TableTh align="center">Verified</TableTh>
+                        <TableTh align="center">Status</TableTh>
                         <TableTh align="center">Created At</TableTh>
                     </tr>
                 </template>

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
     import axios from 'axios';
+
+    const router = useRouter();
     const modal = reactive({
         showLoginModal: false,
         showRegisterModal: false,
@@ -11,6 +13,7 @@
     interface ApiResponse {
         success: boolean;
         message: string;
+        data: any;
     }
 
     const form = reactive({
@@ -52,13 +55,17 @@
     }
 
     const handleSubmitForm = async() => {
+        const formData = {
+            email: form.email,
+            password: form.password,
+        };
         console.log("API Token inside function:", config.public.apiToken || config.apiToken);
         loading.value = true;
         error.error = false;
         error.errorMessage = '';
         error.errors = {};
         try {
-            const response = await axios.get<ApiResponse>(`${config.public.baseURL}/users?email=${encodeURIComponent(form.email)}&password=${encodeURIComponent(form.password)}`, {
+            const response = await axios.post<ApiResponse>(`${config.public.baseURL}/users/authenticate`, formData,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -70,8 +77,8 @@
                 error.error = false;
                 error.errorMessage = '';
             }
-
-            console.log("response", response.data);
+            useCookie('user').value = response.data.data;
+            router.push('admin/');
         } catch (err: any) {
             error.error = true;
             error.errorMessage = err.response?.data?.message || 'An error occurred during login.';
@@ -121,7 +128,13 @@
         setDefaultForm();
     }
 
+    
+
     onMounted(() => {
+        console.log("Runtime Config Base URL:", config.public.baseURL);
+        if(useUserCookie()){
+            router.push('admin/');
+        }
         watchEffect(() => {
             if (form.password !== form.password_confirmation && modal.showRegisterModal) {
                 error.passwordMismatch = true;
@@ -129,8 +142,6 @@
                 error.passwordMismatch = false;
             }
         });
-
-        console.log("API Token:", config.public.apiToken || config.apiToken);
     })
 
 

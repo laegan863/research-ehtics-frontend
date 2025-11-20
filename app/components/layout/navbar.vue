@@ -11,6 +11,12 @@ const notifications = [
   { id: 4, title: 'New message received', time: '2 hours ago', unread: false },
 ]
 const unreadCount = computed(() => notifications.filter(n => n.unread).length)
+
+const handleLogout = async () => {
+    await useLogout();
+    const router = useRouter();
+    router.push('/');
+}
 </script>
 
 <template>
@@ -58,7 +64,7 @@ const unreadCount = computed(() => notifications.filter(n => n.unread).length)
             <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
           </span>
         </button>
-        <div v-show="showNotifications" @click="showNotifications = false" class="absolute right-0 mt-3 w-80 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 overflow-hidden">
+        <div v-show="showNotifications" @click="showNotifications = false" class="absolute right-0 mt-3 lg:w-80 md:w-80 w-[270px] origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black/5 dark:bg-gray-800 dark:ring-white/10 overflow-hidden">
           <div class="p-4 border-b border-gray-100 dark:border-gray-700">
             <div class="flex items-center justify-between">
               <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Notifications</h3>
@@ -116,7 +122,7 @@ const unreadCount = computed(() => notifications.filter(n => n.unread).length)
             </a>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-700 p-2">
-            <button class="flex w-full items-center gap-x-3 rounded-lg px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors">
+            <button @click="handleLogout" class="flex w-full items-center gap-x-3 rounded-lg px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors">
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
               </svg>
